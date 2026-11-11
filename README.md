@@ -1,31 +1,29 @@
-# Masking Lab — small GitHub edition
+# Masking Lab — guided listening edition
 
-This edition includes **10 sentences** (`bel_sent01.wav`–`bel_sent10.wav`) and exactly five speech-in-noise settings: **−3, 0, +3, +6, +9 dB SNR**. All five teaching activities remain available. Quiet and the other recorded SNRs are omitted from this edition.
+Includes all five activities, 10 original sentence recordings and speech SNRs −3, 0, +3, +6 and +9 dB. Each activity now includes numbered “Try this” instructions with starting values, comparisons and discussion prompts. The cross-hearing simulator's audio behavior is unchanged.
 
-The speech comparison is now **two blocks of five unique sentences**, ten trials total. Default easy = +9 dB; hard = −3 dB. Each correct sentence is 20 percentage points in its block. Start the comparison before exploration: both modes share the ten-sentence pool, without repeats. Exploration, interruptions, or ending a comparison consume sentences; reload to explicitly start a fresh session. There are no spare sentences for replacing interrupted trials in a full comparison. Export partial results, end the comparison and reload if interrupted.
+## Speech is listening only
 
-## Publish
+There are no typed responses, speech scores, answer keys, comparison blocks or speech-result exports. Select an SNR, press **Play selected SNR**, and compare the same sentence at other SNRs. **Next sentence** advances through a seeded order of all ten recordings without repeating; it does not auto-play. After the tenth recording, **Restart listening set** explicitly restarts the set and permits repeats. Changing the seed also restarts. Babble offsets are seeded by sentence ID and stay the same across SNRs for a fairer comparison. Repetition can improve recognition through familiarity; this is an exploratory demonstration, not a test. Tone detection retains its interval-choice feedback and score.
 
-Unzip the download. Upload the **contents** of `masking-lab-small/` to your repository, preserving `media/` and its files. Do not upload the ZIP itself to the repository. Each individual file is below 7 MB. In Settings → Pages, select Deploy from a branch → main → / (root) → Save. See [GitHub Pages instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+## Upload to GitHub Pages
 
-For a local preview, run `python3 -m http.server 8000` in this folder and visit `http://localhost:8000`. On GitHub Pages students only need a browser and stereo headphones.
+Unzip the download and upload the **contents** of `masking-lab-guided/` to the repository root. Preserve the `media/` folder. Upload the individual files, not the ZIP. Each media file is below 7 MB. In Settings → Pages select Deploy from a branch → main → / (root), then Save. Instructions: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 
-## Calibration and scoring
+For local preview, run `python3 -m http.server 8000` inside the extracted folder and visit `http://localhost:8000`. A file:// page may fail to fetch audio. Students using GitHub Pages need only a browser and stereo headphones. No accounts, server processing, analytics, external libraries, or microphone are used.
 
-All 15 included WAV files are **byte-for-byte copies of the originals**. No normalization, cropping, recompression, or level adjustment was applied. The selected full-length babble recordings retain their original approximately 3 dB level steps. Both sentence and masker use unit source gain and one common master volume; SNR labels retain the supplier's nominal calibration. Their original active-speech calibration procedure was not included and is not independently reconstructed. `audio-audit.json` records checksums and levels.
+## Preserved media levels
 
-The ten sentences remain mono 16-bit PCM at 22,050 Hz; all five babble files are also mono 16-bit PCM at 22,050 Hz. Babble segments begin 250 ms before the sentence and end 250 ms afterward. Seeded sentence order and noise offsets are reproducible. The shared volume control changes both components together.
+All 15 WAVs remain byte-for-byte copies of the uploaded recordings. `audio-audit.json` records SHA-256 checksums, formats, levels and durations. Sentences 01–10 and the five selected babble recordings are mono 16-bit PCM at 22,050 Hz. No normalization, cropping, recompression, limiter, or condition-specific gain is applied. Speech and babble use unit source gain and a single shared master volume. Noise starts 250 ms before speech and ends 250 ms afterward. The original supplied nominal SNR relationships are preserved; the supplier's active-speech calibration procedure was not included and cannot be independently reconstructed. Keep device and shared volume fixed across comparisons.
 
-No transcripts were supplied. Default sentence scoring is explicitly unverified self-report after a typed response. An optional instructor JSON key with verified sentence strings for keys "1" through "10" enables exact-sentence scoring (case and punctuation ignored). The app checks key completeness, not transcript accuracy. Results export locally as JSON, including responses, condition, seed, offsets, interruptions and scoring method. Reload clears memory; export first.
+## Scientific and safety notes
 
-Babble may produce both energetic and informational masking. Changing SNR alone does not isolate informational masking. Five-trial blocks are especially coarse: differences can reflect sentence difficulty, order, attention, or self-rating bias. This is an educational demonstration, not a validated hearing test.
+Babble may produce both energetic and informational masking. Changing SNR alone does not isolate informational masking. Cross-hearing is a digital routing/attenuation illustration with a separate hypothetical dB HL calculation; it does not model actual skull transmission or prescribe clinical masking. Hypothetical presentation level affects the calculation, not the playback level. The guided IA values of 0–20 dB deliberately make the routing illustration audible; they are not assumed consumer-headphone IA values.
 
-## Safety and activities
+Temporal masking uses a 20 ms tone and 300 ms noise with 5 ms ramps. Forward tone onset = 300 ms + gap; backward noise onset = 20 ms + gap. Simultaneous tone onset is 140 ms within the noise. All scheduling uses AudioContext time. Gap is offset-to-onset and is disabled for simultaneous mode. Backward masking may be weak or absent. Synthetic tone/noise SNR is based on RMS over each shared interval; its controls are independent of the recorded speech conditions.
 
-Keep system volume low; use the channel checks before listening. Playback requires the readiness checkbox. Stop all audio or Escape cancels sounds; hiding the page also stops playback. No consumer-headphone volume percentage guarantees a safe SPL. Do not raise volume to chase faint tones.
+Start with system volume low and perform the left/right checks. Playback requires the readiness checkbox. Stop all audio or Escape cancels playback; hiding the page or unchecking readiness stops audio. Do not increase volume to chase faint signals. Software gain is not a calibrated SPL or a guarantee of safe listening. Take breaks and stop if uncomfortable. Semantic labels, keyboard controls, live status text, visible focus indicators and responsive layout are retained.
 
-Cross-hearing illustrates digital ear routing, IA and a hypothetical dB HL calculation; it does not simulate actual skull transmission or prescribe clinical masking. Energetic masking provides adjustable tone/noise SNR. Temporal masking schedules forward, backward and simultaneous presentations on the audio clock. Tone detection uses a seeded two-interval forced-choice task. Speech supports the five supplied SNRs, exploration, two five-trial blocks, scoring and export. Synthetic-tone exercise SNR controls are independent of the five recorded speech SNR choices.
+Media publication rights remain with their rights holders; no media license was supplied.
 
-Semantic labels, keyboard controls, focus outlines, responsive layout and live status text are retained. No accounts, backend, analytics, microphone or external libraries are required. Confirm publication rights for uploaded media; no media license was supplied.
-
-References: [ASHA audiometry guidance](https://www.asha.org/policy/gl2005-00014/); [Kidd et al., energetic and informational masking](https://pubmed.ncbi.nlm.nih.gov/16158654/).
+References: https://www.asha.org/policy/gl2005-00014/ and https://pubmed.ncbi.nlm.nih.gov/16158654/
