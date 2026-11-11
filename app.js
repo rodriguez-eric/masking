@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 let ctx,master,sources=[],busy=false,audioToken=0;
 const status=text=>$('globalStatus').textContent=text;
 function rng(seed){let h=2166136261;for(const c of String(seed)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return()=>{h+=0x6D2B79F5;let t=h;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
-function shuffled(seed){const r=rng(seed),a=Array.from({length:10},(_,i)=>i+1);for(let i=9;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffled(seed){const r=rng(seed),a=Array.from({length:5},(_,i)=>i+1);for(let i=4;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 async function audio(){if(!$('consent').checked)throw Error('Confirm your low device volume in the setup panel first.');if(!ctx){ctx=new AudioContext();master=ctx.createGain();master.connect(ctx.destination)}await ctx.resume();master.gain.value=+$('volume').value/100;return ctx}
 function stop(){audioToken++;for(const source of sources){try{source.stop()}catch{}}sources=[];busy=false;status('Audio stopped');if(current&&!current.finished){current.finished=true;$('speechStatus').textContent='Playback stopped. You can listen again at any SNR.'}detectPending=null;$('answer1').disabled=$('answer2').disabled=true;controlsLock(false)}
 $('stop').onclick=stop;document.addEventListener('keydown',e=>{if(e.key==='Escape')stop()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&busy)stop()});
@@ -25,11 +25,11 @@ for(const id of ['timePlay','timeTone'])$(id).onclick=()=>run(token=>{const p=ti
 let detectPending=null,detectN=0,detectCorrect=0;const detectLog=[];
 $('detectPlay').onclick=()=>run(token=>{if(detectPending!==null)throw Error('Answer the current pair first.');const seed=$('detectSeed').value,n=detectN++,r=rng(seed+':'+n),target=r()<.5?1:2,snr=+$('detectSnr').value,at=ctx.currentTime+.1;for(let i=1;i<=2;i++){const t=at+(i-1)*1.1;bufferSound(generated('noise',.6,.045,1000,seed+':'+n+':'+i),t);if(i===target)bufferSound(generated('tone',.6,.045*10**(snr/20)),t)}status('Two-interval trial playing');setTimeout(()=>{if(token!==audioToken)return;detectPending={target,snr,seed,n};$('answer1').disabled=$('answer2').disabled=false;$('detectResult').textContent='Which interval contained the tone?'},(at+1.7-ctx.currentTime)*1000);done(at+1.7,token)});
 for(const i of [1,2])$('answer'+i).onclick=()=>{if(!detectPending)return;const ok=i===detectPending.target;detectCorrect+=+ok;detectLog.push({...detectPending,response:i,correct:ok});$('detectResult').textContent=`${ok?'Correct':'The tone was in interval '+detectPending.target}. Score: ${detectCorrect}/${detectLog.length}. SNR: ${detectPending.snr} dB. Compare results at the same SNR before pooling conditions.`;detectPending=null;$('answer1').disabled=$('answer2').disabled=true};
-const snrs=['-3','0','3','6','9'];
+const snrs=['-9','-6','-3','0','3','6'];
 for(const value of snrs){const option=document.createElement('option');option.value=value;option.textContent=(+value>0?'+':'')+value+' dB SNR';$('exploreSnr').append(option)}
-$('exploreSnr').value='9';
+$('exploreSnr').value='6';
 const cache=new Map();let current=null,speechIndex=0,sessionSeed=$('speechSeed').value,deck=shuffled(sessionSeed);
-function updateSentence(){ $('sentenceStatus').textContent='Sentence '+(speechIndex+1)+' of 10 · recording '+deck[speechIndex];$('nextSentence').disabled=speechIndex===9 }
+function updateSentence(){ $('sentenceStatus').textContent='Sentence '+(speechIndex+1)+' of 5 · recording '+deck[speechIndex];$('nextSentence').disabled=speechIndex===4 }
 function noiseFile(snr){return 'babble-'+(+snr===0?'zero':+snr<0?'neg'+String(-snr).padStart(2,'0'):'pos'+String(snr).padStart(2,'0'))+'.wav'}
 async function load(file){if(!cache.has(file)){const promise=fetch('media/'+file).then(response=>{if(!response.ok)throw Error('Could not load '+file+'. Check media files and serve over HTTP.');return response.arrayBuffer()}).then(data=>ctx.decodeAudioData(data));cache.set(file,promise);try{return await promise}catch(error){cache.delete(file);throw error}}return cache.get(file)}
 function controlsLock(locked){for(const id of ['speechSeed','explore','exploreSnr','nextSentence','restartSpeech'])$(id).disabled=locked;if(!locked)updateSentence()}
@@ -44,7 +44,7 @@ $('speechStatus').textContent='Listening to recording '+id+' at '+(+snr>0?'+':''
 setTimeout(()=>{if(token!==audioToken)return;busy=false;sources=[];current.finished=true;controlsLock(false);$('speechStatus').textContent='Finished. Change SNR and listen to this sentence again, or choose Next sentence.';status('Playback complete')},(at+duration-ctx.currentTime)*1000)
 })}
 $('explore').onclick=speechTrial;
-$('nextSentence').onclick=()=>{if(busy||speechIndex===9)return;speechIndex++;updateSentence();$('speechStatus').textContent='New sentence selected. Choose an SNR and press Play selected SNR.'};
+$('nextSentence').onclick=()=>{if(busy||speechIndex===4)return;speechIndex++;updateSentence();$('speechStatus').textContent='New sentence selected. Choose an SNR and press Play selected SNR.'};
 $('restartSpeech').onclick=()=>{if(busy)return;sessionSeed=$('speechSeed').value||'hearing-lab-01';deck=shuffled(sessionSeed);speechIndex=0;current=null;updateSentence();$('speechStatus').textContent='Listening set restarted. Previously heard sentences may repeat.'};
 $('speechSeed').onchange=()=>{$('restartSpeech').onclick()};
 $('consent').onchange=()=>{if(!$('consent').checked)stop()};
