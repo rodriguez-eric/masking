@@ -1,0 +1,152 @@
+[
+  {
+    "file": "bel_sent02.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 1.956689342403628,
+    "peak": 0.21820068359375,
+    "rms": 0.025556816319405175,
+    "sha256": "9842deebc674f713dfb6cc0d3c87769cdbdaf89d9d1bfe815fc58a14f51ec14f"
+  },
+  {
+    "file": "bel_sent03.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 2.1770068027210883,
+    "peak": 0.19964599609375,
+    "rms": 0.026398903219867972,
+    "sha256": "054986a8090e0b503353eee0f125f4cf68bf3cedc65bfe5785974d6d2c17d5e3"
+  },
+  {
+    "file": "babble-pos03.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 148.69333333333333,
+    "peak": 0.144256591796875,
+    "rms": 0.02306527265736241,
+    "sha256": "4404f714bbd92d901e3ccb815862e175b9a60ec97fd8df76442afd38b9db1df6"
+  },
+  {
+    "file": "bel_sent01.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 1.9333786848072563,
+    "peak": 0.202789306640625,
+    "rms": 0.02626975704586016,
+    "sha256": "878181a2d7d4479e7175fd0714ab30a392167dc080e0ef4e527e3c455d614317"
+  },
+  {
+    "file": "bel_sent04.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 2.2677097505668935,
+    "peak": 0.257476806640625,
+    "rms": 0.024653660868592206,
+    "sha256": "ba6e8790ef46ab407f2c817af43624a9736b32f76430bb1ec14eab9ca981af0f"
+  },
+  {
+    "file": "bel_sent10.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 2.138140589569161,
+    "peak": 0.2205810546875,
+    "rms": 0.02638986074015533,
+    "sha256": "b14a21918f8422cd93c36a42129bd5b2f90c03b682b8c28c4c1508b9e5563761"
+  },
+  {
+    "file": "bel_sent05.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 1.7536054421768708,
+    "peak": 0.22119140625,
+    "rms": 0.023777234191801395,
+    "sha256": "44aa551c0e38ad8e5ae78144999fbbb28ed7ee533d64d9d0ca6fb8cc03ab5fa8"
+  },
+  {
+    "file": "bel_sent07.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 2.057777777777778,
+    "peak": 0.213714599609375,
+    "rms": 0.025963449911363137,
+    "sha256": "1e8eae0e76ba02a7e266965c096c18b212e0eedcb809e9a29520a0aefc55f010"
+  },
+  {
+    "file": "babble-zero.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 148.69333333333333,
+    "peak": 0.2037353515625,
+    "rms": 0.03258033848591068,
+    "sha256": "1cf7c6663f2b6a009577c35e31dec71d3de5982efc679cc7f7b84fa4df65016f"
+  },
+  {
+    "file": "bel_sent06.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 2.0785034013605443,
+    "peak": 0.19281005859375,
+    "rms": 0.026989008862313067,
+    "sha256": "990be32d7dc08e2bd2165aaae3ac9bfa8180fa81fb0f1aadfe14f6e3b4427a72"
+  },
+  {
+    "file": "babble-pos06.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 148.69333333333333,
+    "peak": 0.10205078125,
+    "rms": 0.01632904242461396,
+    "sha256": "64417766130a788cc4688d590b154ddd2346686c7cace5e4c8d7b8c3d34840df"
+  },
+  {
+    "file": "bel_sent08.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 2.246984126984127,
+    "peak": 0.233917236328125,
+    "rms": 0.023413239691201106,
+    "sha256": "31f6a8a70404d7bf69963e82dc764beff2ac7e0c9687d082eda5cc31ed2a55e7"
+  },
+  {
+    "file": "bel_sent09.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 1.7104761904761905,
+    "peak": 0.20208740234375,
+    "rms": 0.023434818044741554,
+    "sha256": "d5d5236839145c0d6c18bd3a280c826bb13d6a0ae67cfb7f3a801b65cc9773a9"
+  },
+  {
+    "file": "babble-pos09.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 148.69333333333333,
+    "peak": 0.072357177734375,
+    "rms": 0.011560185086953926,
+    "sha256": "524d197ca854735754ad1ac2d750005e446052eca89a97af5ac1bd7f0388c425"
+  },
+  {
+    "file": "babble-neg03.wav",
+    "channels": 1,
+    "width": 2,
+    "rate": 22050,
+    "duration": 148.69333333333333,
+    "peak": 0.28778076171875,
+    "rms": 0.04602107961912173,
+    "sha256": "f65be7bd443d5ef8fcac1b35b698810502259e56a91321aab378d7f5709c2317"
+  }
+]

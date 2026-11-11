@@ -1,40 +1,31 @@
-# SLHS 302 Masking Lab
+# Masking Lab — small GitHub edition
 
-A buildless, browser-only activity for comparing detection of a 1000-Hz tone in quiet and three 200-Hz-wide noise bands (500, 1000, 2000 Hz centers). Designed for students' headphones, with an example-data alternative. No accounts, backend, analytics, microphone access, third-party scripts, or dependencies.
+This edition includes **10 sentences** (`bel_sent01.wav`–`bel_sent10.wav`) and exactly five speech-in-noise settings: **−3, 0, +3, +6, +9 dB SNR**. All five teaching activities remain available. Quiet and the other recorded SNRs are omitted from this edition.
 
-## Put it on GitHub Pages
+The speech comparison is now **two blocks of five unique sentences**, ten trials total. Default easy = +9 dB; hard = −3 dB. Each correct sentence is 20 percentage points in its block. Start the comparison before exploration: both modes share the ten-sentence pool, without repeats. Exploration, interruptions, or ending a comparison consume sentences; reload to explicitly start a fresh session. There are no spare sentences for replacing interrupted trials in a full comparison. Export partial results, end the comparison and reload if interrupted.
 
-1. Create a GitHub repository named `slhs302-masking-lab` (public if your plan requires it for Pages).
-2. Upload `index.html` to the repository root. The release is self-contained: it includes all styling and JavaScript. You can also upload this README. Do not upload only the ZIP.
-3. In the repository, open **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**, select `main` and `/ (root)`, then save.
-4. Wait for the Pages deployment to finish. GitHub provides the exact published URL in Settings → Pages. It will normally resemble `https://YOUR-USERNAME.github.io/slhs302-masking-lab/`.
-5. Pilot the live page with the headphones/browser you will use in class. Check the setup sound, both intervals, Stop audio, CSV download, and a full measured run. Use the final URL in your slides or Brightspace.
+## Publish
 
-No build command, API keys, npm install, or hosting subscription is needed. Relative asset links support GitHub Pages repository subpaths. To preview locally, serve this folder with `python3 -m http.server 8000` and open `http://localhost:8000`.
+Unzip the download. Upload the **contents** of `masking-lab-small/` to your repository, preserving `media/` and its files. Do not upload the ZIP itself to the repository. Each individual file is below 7 MB. In Settings → Pages, select Deploy from a branch → main → / (root) → Save. See [GitHub Pages instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
-## Classroom use
+For a local preview, run `python3 -m http.server 8000` in this folder and visit `http://localhost:8000`. On GitHub Pages students only need a browser and stereo headphones.
 
-Students set a comfortably soft volume using the setup sound, predict the strongest masker, then complete three practice trials. They complete a quiet block and three randomized noise blocks using two-interval forced choice. They should guess when uncertain. Each response requires a new press of Play trial, so students can pause between trials. Stop audio or Escape discards the interrupted trial without scoring it. Hiding the tab also pauses. Keep headphones, system volume, and sound processing fixed throughout.
+## Calibration and scoring
 
-Results show estimates and elevations from quiet. Students write explanations and download a CSV for submission through your LMS. Data remain in localStorage on that browser and are overwritten when a new measured session starts. There is no class dashboard or automatic submission. An anonymous random session ID is used; the page does not request student names.
+All 15 included WAV files are **byte-for-byte copies of the originals**. No normalization, cropping, recompression, or level adjustment was applied. The selected full-length babble recordings retain their original approximately 3 dB level steps. Both sentence and masker use unit source gain and one common master volume; SNR labels retain the supplier's nominal calibration. Their original active-speech calibration procedure was not included and is not independently reconstructed. `audio-audit.json` records checksums and levels.
 
-## Method and interpretation
+The ten sentences remain mono 16-bit PCM at 22,050 Hz; all five babble files are also mono 16-bit PCM at 22,050 Hz. Babble segments begin 250 ms before the sentence and end 250 ms afterward. Seeded sentence order and noise offsets are reproducible. The shared volume control changes both components together.
 
-- Tone: 1000 Hz, 350 ms, beginning 150 ms into one 650-ms interval.
-- Two intervals separated by 450 ms; independent Gaussian noise samples in each interval.
-- 20-ms linear onset/offset ramps; identical signal mixture at both ears.
-- Rectangular 200-Hz noise passbands generated by inverse FFT. Noise RMS = 0.04 before ramps; fixed master gain = 0.18.
-- Tone levels: −66 to −12 dB re RMS 1 before master gain. A sine at RMS 1 would exceed full-scale peak, but this app never uses that level. These numbers are digital ratios, not calibrated acoustic levels or dB HL. System/hardware volume remains outside the app's control.
-- Two-down/one-up staircase, 4-dB steps before two reversals, then 2-dB steps. Stop at six reversals or 36 responses. Average the last four reversal levels only after six reversals. Incomplete blocks show no estimate. Bounds are flagged. The short run yields rough classroom estimates.
-- Quiet always comes first; masker order is randomized. Practice and order effects are possible.
-- Equal bandwidth and equal noise RMS across masker frequencies. This tests frequency proximity. It does **not** isolate upward spread of masking, demonstrate clinical contralateral masking, or measure critical bandwidth. A critical-bandwidth exercise would need constant spectrum level while varying bandwidth.
-- The setup sound uses the maximum available tone level together with on-frequency noise. Start with low system volume and establish comfort before measurement. Digital limits cannot certify safe acoustic output across headphones. Stop if uncomfortable. Students may use example data instead.
+No transcripts were supplied. Default sentence scoring is explicitly unverified self-report after a typed response. An optional instructor JSON key with verified sentence strings for keys "1" through "10" enables exact-sentence scoring (case and punctuation ignored). The app checks key completeness, not transcript accuracy. Results export locally as JSON, including responses, condition, seed, offsets, interruptions and scoring method. Reload clears memory; export first.
 
-## Configuration and verification
+Babble may produce both energetic and informational masking. Changing SNR alone does not isolate informational masking. Five-trial blocks are especially coarse: differences can reflect sentence difficulty, order, attention, or self-rating bias. This is an educational demonstration, not a validated hearing test.
 
-Core constants and pure functions are in `engine.js`. Trial logic is in `app.js`. Review changes to audio levels and timing carefully; pilot before class. `verify.cjs` checks staircase behavior, bounds, termination, and synthesized spectrum/RMS. Run with `node verify.cjs` if Node is available. It does not replace browser/audio testing.
+## Safety and activities
 
-Web Audio implementation reference: https://www.w3.org/TR/webaudio/
-GitHub Pages instructions: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+Keep system volume low; use the channel checks before listening. Playback requires the readiness checkbox. Stop all audio or Escape cancels sounds; hiding the page also stops playback. No consumer-headphone volume percentage guarantees a safe SPL. Do not raise volume to chase faint tones.
 
-Teaching basis: supplied SLHS 302 masking decks and Spring 2025 final exam. This project is an educational demonstration, not a diagnostic tool.
+Cross-hearing illustrates digital ear routing, IA and a hypothetical dB HL calculation; it does not simulate actual skull transmission or prescribe clinical masking. Energetic masking provides adjustable tone/noise SNR. Temporal masking schedules forward, backward and simultaneous presentations on the audio clock. Tone detection uses a seeded two-interval forced-choice task. Speech supports the five supplied SNRs, exploration, two five-trial blocks, scoring and export. Synthetic-tone exercise SNR controls are independent of the five recorded speech SNR choices.
+
+Semantic labels, keyboard controls, focus outlines, responsive layout and live status text are retained. No accounts, backend, analytics, microphone or external libraries are required. Confirm publication rights for uploaded media; no media license was supplied.
+
+References: [ASHA audiometry guidance](https://www.asha.org/policy/gl2005-00014/); [Kidd et al., energetic and informational masking](https://pubmed.ncbi.nlm.nih.gov/16158654/).
